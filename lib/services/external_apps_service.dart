@@ -11,6 +11,22 @@ class ExternalAppsService {
     }
   }
 
+  Future<void> contactDeveloper() async {
+    var phoneNumber = '+263713764301';
+    final Uri launchUri = Uri(scheme: 'tel', path: phoneNumber);
+    if(!await launchUrl(launchUri)){
+      throw Fluttertoast.showToast(msg: 'An error occurred. Try again');
+    }
+  }
+
+  Future<void> contactDeveloperWhatsapp() async {
+    var phoneNumber = '+263779038820';
+    final Uri launchUri = Uri(scheme: 'tel', path: phoneNumber);
+    if(!await launchUrl(launchUri)){
+      throw Fluttertoast.showToast(msg: 'An error occurred. Try again');
+    }
+  }
+
 
   Future<void> makePhoneCall2() async {
     var phoneNumber = '+2638677000716';
@@ -23,7 +39,7 @@ class ExternalAppsService {
   // Function to open WhatsApp using inAppWebView
   Future<void> openWhatsApp() async {
     final whatsappNumber = '+263772126120';
-    final message = 'I would like help with...';
+    final message = 'I would like to subscribe to a package...';
     final whatsappUrl = Uri.parse('https://wa.me/$whatsappNumber?text=${Uri.encodeFull(message)}');
     if (!await launchUrl(whatsappUrl, mode: LaunchMode.externalNonBrowserApplication)) {
       throw Exception('Could not launch $whatsappUrl');
@@ -34,6 +50,13 @@ class ExternalAppsService {
     final facebookUrl = Uri.parse('https://www.facebook.com/profile.php?id=61552586095917');
     if (!await launchUrl(facebookUrl, mode: LaunchMode.externalApplication)) {
       Fluttertoast.showToast(msg: 'Unable to open Facebook.');
+    }
+  }
+
+  Future<void> openDeveloperWebsite() async {
+    final facebookUrl = Uri.parse('https://softifysolutionsgroup.com');
+    if (!await launchUrl(facebookUrl, mode: LaunchMode.externalApplication)) {
+      Fluttertoast.showToast(msg: 'Unable to open website.');
     }
   }
 

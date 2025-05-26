@@ -151,17 +151,67 @@ class _AboutScreenState extends State<AboutScreen> {
                         ),
                       ),
                     ),
-              SizedBox(height: Dimensions.blockSizeVertical*2),
-              GestureDetector(
-                child: Text(
-                  "✉️ contactus@thejungle-gym.com",
-                  style: TextStyle(
-                    fontSize: Dimensions.blockSizeVertical * 1.8,
-                    color: Colors.white70,
-                  ),
-                ),
-              ),
+                    SizedBox(height: Dimensions.blockSizeVertical*2),
+                    GestureDetector(
+                      child: Text(
+                        "✉️ contactus@thejungle-gym.com",
+                        style: TextStyle(
+                          fontSize: Dimensions.blockSizeVertical * 1.8,
+                          color: Colors.white70,
+                        ),
+                      ),
+                    ),
 
+                    SizedBox(height: Dimensions.blockSizeVertical * 3),
+
+                    // Developer Info
+                    Text(
+                      "Developer",
+                      style: TextStyle(
+                        fontSize: Dimensions.blockSizeVertical * 2.3,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(height: Dimensions.blockSizeVertical * 2),
+                    GestureDetector(
+                      onTap: () {
+                        externalAppsService.contactDeveloperWhatsapp();
+                      },
+                      child: Text(
+                        "✉️ sidney@softifysolutionsgroup.com",
+                        style: TextStyle(
+                          fontSize: Dimensions.blockSizeVertical * 1.8,
+                          color: Colors.white70,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: Dimensions.blockSizeVertical * 1),
+                    GestureDetector(
+                      onTap: () {
+                        externalAppsService.contactDeveloper();
+                      },
+                      child: Text(
+                        "📞 +263 71 376 4301",
+                        style: TextStyle(
+                          fontSize: Dimensions.blockSizeVertical * 1.8,
+                          color: Colors.white70,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: Dimensions.blockSizeVertical * 1),
+                    GestureDetector(
+                      onTap: () {
+                        externalAppsService.openDeveloperWebsite();
+                      },
+                      child: Text(
+                        "🌐 https://softifysolutionsgroup.com",
+                        style: TextStyle(
+                          fontSize: Dimensions.blockSizeVertical * 1.8,
+                          color: Colors.white70,
+                        ),
+                      ),
+                    ),
 
                     SizedBox(height: Dimensions.blockSizeVertical * 3),
 

@@ -31,7 +31,9 @@ class MyJungleScreen extends StatelessWidget {
                 Row(
                   children: [
                     IconButton(
-                      icon: Icon(Icons.arrow_back, color: Colors.white, size: Dimensions.iconSize24),
+                      icon: Icon(Icons.arrow_back,
+                          color: Colors.white,
+                          size: Dimensions.iconSize24),
                       onPressed: () => Navigator.pop(context),
                     ),
                     SizedBox(width: Dimensions.blockSizeHorizontal * 2),
@@ -45,19 +47,88 @@ class MyJungleScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: Dimensions.blockSizeVertical * 10),
-                Center(
+                SizedBox(height: Dimensions.blockSizeVertical * 5),
+
+                // Card-style container
+                Container(
+                  width: double.infinity,
+                  margin: EdgeInsets.symmetric(
+                      horizontal: Dimensions.blockSizeHorizontal * 3),
+                  padding: EdgeInsets.all(Dimensions.blockSizeHorizontal * 5),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.7),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.white, width: 2),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.white.withOpacity(0.3),
+                        blurRadius: 10,
+                        spreadRadius: 3,
+                      )
+                    ],
+                  ),
                   child: Column(
                     children: [
-                      Icon(Icons.local_cafe, color: Colors.white30, size: Dimensions.blockSizeVertical * 10),
-                      SizedBox(height: Dimensions.blockSizeVertical * 2),
+                      Icon(Icons.credit_card,
+                          color: Colors.white,
+                          size: Dimensions.blockSizeVertical * 8),
+                      SizedBox(height: Dimensions.blockSizeVertical * 3),
                       Text(
-                        "No credits available.",
-                        style: TextStyle(color: Colors.white70, fontSize: Dimensions.blockSizeVertical * 2),
+                        "JUNGLE GYM CARD",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: Dimensions.blockSizeVertical * 2.5,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1.5,
+                        ),
+                      ),
+                      SizedBox(height: Dimensions.blockSizeVertical * 4),
+                      Container(
+                        padding: EdgeInsets.all(Dimensions.blockSizeHorizontal * 3),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: Colors.white, width: 1),
+                        ),
+                        child: Column(
+                          children: [
+                            Text(
+                              "HOW TO DEPOSIT",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: Dimensions.blockSizeVertical * 1.8,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: Dimensions.blockSizeVertical * 1.5),
+                            Text(
+                              "Visit our gym location to deposit cash",
+                              style: TextStyle(
+                                color: Colors.white70,
+                                fontSize: Dimensions.blockSizeVertical * 2,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            SizedBox(height: Dimensions.blockSizeVertical * 1),
+                            Icon(Icons.location_on,
+                                color: Colors.white,
+                                size: Dimensions.blockSizeVertical * 3),
+                            Text(
+                              "3 Ridgeway North, Highlands\nHarare, Zimbabwe",
+                              style: TextStyle(
+                                color: Colors.white70,
+                                fontSize: Dimensions.blockSizeVertical * 1.8,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
                 ),
+                SizedBox(height: Dimensions.blockSizeVertical * 5),
+
               ],
             ),
           ),

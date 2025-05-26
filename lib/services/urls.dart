@@ -1,9 +1,10 @@
 class Urls {
-  static String baseUrl = 'http://10.0.2.2:8000/api/';
-  //static String baseUrl = 'http://54.88.229.146/api/';
+  //static String baseUrl = 'http://localhost:8000/api/';
+  //static String baseUrl = 'http://18.235.229.147/api/';
+  static String baseUrl = 'https://softifysolutionsgroup.com/api/';
 
   //check network connectivity
-  static String checkConnectivity =  'https://google.com';
+  static String checkConnectivity =  '${baseUrl}checkConnectivity';
   //login user
   static String login = '${baseUrl}login';
   // register user
@@ -17,34 +18,61 @@ class Urls {
   //checkRegToken
   static String checkRegToken = '${baseUrl}check_reg_token';
 
-  //save Patient Record
-  static String savePatient = '${baseUrl}save_patient';
-  //return list of all patients
-  static String allPatients = '${baseUrl}all_patients';
-  //add prescription
-  static String addPrescription = '${baseUrl}add_prescription';
-  //get patient prescription history
-  static String prescriptionHistory = '${baseUrl}prescription_history';
-  //add patient note
-  static String addNotes = '${baseUrl}add_notes';
-  //return patient's notes
-  static String patientNotes = '${baseUrl}patient_notes';
-  //contact support
-  static String contactSupport =  '${baseUrl}customer_contact_support';
-  //return all prescriptions
- static String allPrescriptions = '${baseUrl}all_prescriptions';
+  //return list of shared location
+  static String sharedLocations = '${baseUrl}shared_locations';
 
- //APPOINTMENTS
- //return all appointments
-  static String allAppointments = '${baseUrl}logged_cus_appointments';
-  //return list of all doctors
-  static String allDoctors = '${baseUrl}all_doctors';
-  //schedule appointment
-  static String scheduleAppointment = '${baseUrl}add_appointment';
-  //patient upload image
-  static String patientPrepUpload = '${baseUrl}patient_prep_upload';
+  //share location to db
+  static String saveLocation = '${baseUrl}save_location';
+
+  //return dashboard stats
+  static String dashboardStats = '${baseUrl}dashboard_stats';
+
+  //get reset token
+  static String getPasswordResetToken = '${baseUrl}getPasswordResetToken';
+
+  //resend token
+  static String resendToken = '${baseUrl}resend_token';
+
+  //check sent token
+  static String checkSentToken = '${baseUrl}check_sent_token';
+
+  //reset password
+  static String resetPassword = '${baseUrl}reset_password';
+
+  //set as attended
+  static String setAttended = '${baseUrl}set';
 
 
-  //questions
-  static String ask = '${baseUrl}ask';
+  //set as unattended
+  static String setAsUnattended = '${baseUrl}setAsUnattended';
+
+  //users list
+  static String usersList = '${baseUrl}users_list';
+
+  //set as admin
+  static String updateProfile = '${baseUrl}update_profile';
+
+  //set as ordinary
+  static String removeAsAdmin = '${baseUrl}removeAsAdmin';
+
+  //save package
+  static String savePackage = '${baseUrl}save_package';
+
+  //get list of packages
+  static String packages = '${baseUrl}packages';
+
+  //archive package
+  static String deletePackage = '${baseUrl}delete_package';
+
+  //upload client file
+  static String uploadFile = '${baseUrl}customer_file_upload';
+
+  //update email
+  static String updateProfileEMail = '${baseUrl}profile_email_update';
+
+  //update number
+  static String profileUpdatePhone = '${baseUrl}profile_update_phone';
+
+
+
 }

@@ -1,8 +1,9 @@
+
 import 'package:flutter/material.dart';
+import 'package:junglegym/controllers/auth_controller.dart';
+import 'package:junglegym/services/dimensions.dart';
 import 'package:pinput/pinput.dart';
 import 'package:smart_auth/smart_auth.dart';
-import '../../../services/dimensions.dart';
-import '../../controllers/auth_controller.dart';
 
 class OtpScreen extends StatefulWidget {
   @override
@@ -16,6 +17,7 @@ class _OtpScreenState extends State<OtpScreen> {
   late final FocusNode focusNode;
   late final GlobalKey<FormState> formKey;
   bool isLoading = false;
+  bool isLoading2 = false;
 
   @override
   void initState() {
@@ -40,40 +42,39 @@ class _OtpScreenState extends State<OtpScreen> {
   Widget build(BuildContext context) {
     Dimensions.init(context);
 
-    const focusedBorderColor = Color.fromRGBO(255, 255, 255, 1.0);
-    const fillColor = Color.fromRGBO(243, 246, 249, 0);
-    const borderColor = Color.fromRGBO(233, 226, 243, 1.0);
+    const borderColor = Colors.grey;
+    const fillColor = Colors.white;
+    const focusedBorderColor = Colors.grey;
 
     final defaultPinTheme = PinTheme(
       width: Dimensions.blockSizeHorizontal * 14,
       height: Dimensions.blockSizeVertical * 8,
       textStyle: TextStyle(
         fontSize: Dimensions.blockSizeHorizontal * 5,
-        color: Colors.white,
+        color: Colors.black,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(19),
         border: Border.all(color: borderColor),
-        color: Colors.grey[850],
+        color: fillColor,
       ),
     );
 
     return Scaffold(
       body: SafeArea(
         child: Container(
-          width: MediaQuery.of(context).size.width, // Fill the screen width
-          height: MediaQuery.of(context).size.height, // Fill the screen height
           decoration: BoxDecoration(
             image: DecorationImage(
               image: const AssetImage('assets/images/img_2.png'),
-              fit:
-                  BoxFit.cover, // Ensures the image covers the entire container
+              fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
                 Colors.black.withOpacity(0.50),
                 BlendMode.darken,
               ),
             ),
           ),
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
           child: Padding(
             padding: EdgeInsets.symmetric(
               horizontal: Dimensions.blockSizeHorizontal * 5,
@@ -89,27 +90,40 @@ class _OtpScreenState extends State<OtpScreen> {
                           fontSize: Dimensions.blockSizeVertical * 3,
                           color: Colors.white)),
                   SizedBox(height: Dimensions.blockSizeVertical * 5),
-                  const Text('Enter the code sent to number',
+                  const Text('Waiting to automatically detect an sms sent to',
                       style: TextStyle(color: Colors.white)),
                   SizedBox(height: Dimensions.blockSizeVertical * 2),
-                  Text(data.read('msisdn'),
+                  Text('+ ${data.read('resetNumber') ?? 'Unknown number'}',
                       style: const TextStyle(color: Colors.white)),
                   SizedBox(height: Dimensions.blockSizeVertical * 5),
-                  Pinput(
+                  isLoading2
+                      ? const CircularProgressIndicator(
+                    color: Colors.white,
+                  )
+                      : Pinput(
                     smsRetriever: smsRetriever,
                     controller: pinController,
                     focusNode: focusNode,
                     defaultPinTheme: defaultPinTheme,
-                    separatorBuilder: (index) =>
-                        SizedBox(width: Dimensions.blockSizeHorizontal * 2),
+                    separatorBuilder: (index) => SizedBox(
+                        width: Dimensions.blockSizeHorizontal * 2),
                     hapticFeedbackType: HapticFeedbackType.lightImpact,
-                    onCompleted: (pin) {
-                      debugPrint('onCompleted: $pin');
-                      authController.checkRegToken(context, pin);
+                    onCompleted: (pin) async {
                       setState(() {
-                        Navigator.of(context).pop();
+                        isLoading2 = true;
                       });
+
+                      bool result = await authController.checkSentToken(context, pin);
+
+                      await Future.delayed(const Duration(milliseconds: 500)); // smooth transition
+
+                      if (!result) {
+                        setState(() {
+                          isLoading2 = false;
+                        });
+                      }
                     },
+
                     onChanged: (value) {
                       debugPrint('onChanged: $value');
                     },
@@ -126,19 +140,20 @@ class _OtpScreenState extends State<OtpScreen> {
                     ),
                     focusedPinTheme: defaultPinTheme.copyWith(
                       decoration: defaultPinTheme.decoration!.copyWith(
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: focusedBorderColor),
+                        borderRadius: BorderRadius.circular(19),
+                        border: Border.all(color: focusedBorderColor, width: 2),
+                        color: fillColor,
                       ),
                     ),
                     submittedPinTheme: defaultPinTheme.copyWith(
                       decoration: defaultPinTheme.decoration!.copyWith(
-                        color: fillColor,
                         borderRadius: BorderRadius.circular(19),
-                        border: Border.all(color: focusedBorderColor),
+                        border: Border.all(color: borderColor, width: 2),
+                        color: fillColor,
                       ),
                     ),
                     errorPinTheme: defaultPinTheme.copyBorderWith(
-                      border: Border.all(color: Colors.redAccent),
+                      border: Border.all(color: Colors.redAccent, width: 2),
                     ),
                   ),
                   SizedBox(height: Dimensions.blockSizeVertical * 4),
@@ -152,20 +167,21 @@ class _OtpScreenState extends State<OtpScreen> {
                       setState(() {
                         isLoading = true;
                       });
-                      await authController.resendRegToken(context);
+                      await authController.resendToken(context);
                       setState(() {
-                        isLoading = false; // Ensure UI updates after request completion
+                        isLoading = false;
                       });
                     },
-                    child: const Text(
+                    child: isLoading
+                        ? const CircularProgressIndicator(color: Colors.white)
+                        : const Text(
                       "Resend",
                       style: TextStyle(
                         color: Colors.white,
                         decoration: TextDecoration.underline,
                       ),
                     ),
-                  )
-
+                  ),
                 ],
               ),
             ),
