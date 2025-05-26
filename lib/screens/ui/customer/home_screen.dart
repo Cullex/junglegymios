@@ -235,7 +235,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Row(
                         children: [
                           IconButton(
-                            icon: FaIcon(FontAwesomeIcons.facebook,
+                            icon: const FaIcon(FontAwesomeIcons.facebook,
                                 color: Colors.blue),
                             onPressed: () {
                               externalAppsService.openFacebook();
@@ -248,7 +248,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Row(
                         children: [
                           IconButton(
-                            icon: FaIcon(FontAwesomeIcons.instagram,
+                            icon: const FaIcon(FontAwesomeIcons.instagram,
                                 color: Colors.red),
                             onPressed: () {
                               externalAppsService.openInstagram();
